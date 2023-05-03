@@ -10,21 +10,26 @@ import java.util.List;
 
 import static com.example.authorization_service.service.Authorities.NON;
 
+@Service
 public class AuthorizationService {
     
-    UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository;
+    
+    public AuthorizationService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
     
     public List<Authorities> gettAuthorities(String user, String password) {
         if (isEmpty(user) || isEmpty(password)) {
-            throw new InvalidCredentials("Логин или пароль пусты");
+            throw new InvalidCredentials("Г‹Г®ГЈГЁГ­ ГЁГ«ГЁ ГЇГ Г°Г®Г«Гј ГЇГіГ±ГІГ»");
         }
         List<Authorities> userAuthorities = userRepository.getUserAuthorities(user, password);
         if (isEmpty(userAuthorities)) {
-            throw new UnauthorizedUser("Незарегистрированный пользователь " + user);
+            throw new UnauthorizedUser("ГЌГҐГ§Г Г°ГҐГЈГЁГ±ГІГ°ГЁГ°Г®ГўГ Г­Г­Г»Г© ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј " + user);
         }
         
         if (userAuthorities.get(0) == NON) {
-            throw new InvalidPassword("Неверный пароль пользователя " + user);
+            throw new InvalidPassword("ГЌГҐГўГҐГ°Г­Г»Г© ГЇГ Г°Г®Г«Гј ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї " + user);
         }
         
         return userAuthorities;
