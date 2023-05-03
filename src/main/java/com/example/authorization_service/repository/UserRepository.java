@@ -9,10 +9,16 @@ import java.util.List;
 
 import static com.example.authorization_service.service.Authorities.*;
 
+@Repository
 public class UserRepository {
     
     protected static HashMap<String, UserAuthority> registeredUsers = new HashMap<>();
     
+    private final UserAuthority  userAuthority;
+    
+    public UserRepository(UserAuthority userAuthority) {
+        this.userAuthority = userAuthority;
+    }    
     
     public static void initRegister() {
         List<Authorities> userAuth;
