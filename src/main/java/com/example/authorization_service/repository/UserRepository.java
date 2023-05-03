@@ -2,6 +2,7 @@ package com.example.authorization_service.repository;
 
 import com.example.authorization_service.domain.UserAuthority;
 import com.example.authorization_service.service.Authorities;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,13 +10,18 @@ import java.util.List;
 
 import static com.example.authorization_service.service.Authorities.*;
 
+@Repository
 public class UserRepository {
     
     protected static HashMap<String, UserAuthority> registeredUsers = new HashMap<>();
     
+    private final UserAuthority  userAuthority;
+    
+    public UserRepository(UserAuthority userAuthority) {
+        this.userAuthority = userAuthority;
+    }
     
     public static void initRegister() {
-        List<Authorities> userAuth;
         
         UserAuthority user1 = new UserAuthority("us1", "password1");
         user1.getAuth().add(READ);

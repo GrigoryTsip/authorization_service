@@ -14,7 +14,11 @@ import java.util.List;
 @RestController
 public class AuthorizationController {
     
-    AuthorizationService service = new AuthorizationService();
+    private final AuthorizationService service;
+    
+    public AuthorizationController(AuthorizationService service) {
+        this.service = service;
+    }
     
     // Делаем свою аннотацию, которая читает запрос и формирует объект UserAuthority
     @GetMapping("/authorize")

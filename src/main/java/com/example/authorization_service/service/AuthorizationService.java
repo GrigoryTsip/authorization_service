@@ -4,14 +4,19 @@ import com.example.authorization_service.domain.UserAuthority;
 import com.example.authorization_service.error.InvalidPassword;
 import com.example.authorization_service.error.UnauthorizedUser;
 import com.example.authorization_service.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static com.example.authorization_service.service.Authorities.NON;
-
+@Service
 public class AuthorizationService {
     
-    UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository;
+    
+    public AuthorizationService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
     
     public List<Authorities> getAuthorities(UserAuthority user) {
         /*
