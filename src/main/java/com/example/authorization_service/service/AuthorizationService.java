@@ -1,7 +1,6 @@
 package com.example.authorization_service.service;
 
-import com.example.authorization_service.error.ExceptionHandlerAdvice;
-import com.example.authorization_service.error.InvalidCredentials;
+import com.example.authorization_service.domain.UserAuthority;
 import com.example.authorization_service.error.InvalidPassword;
 import com.example.authorization_service.error.UnauthorizedUser;
 import com.example.authorization_service.repository.UserRepository;
@@ -14,17 +13,20 @@ public class AuthorizationService {
     
     UserRepository userRepository = new UserRepository();
     
-    public List<Authorities> gettAuthorities(String user, String password) {
+    public List<Authorities> getAuthorities(UserAuthority user) {
+        /*
         if (isEmpty(user) || isEmpty(password)) {
-            throw new InvalidCredentials("Логин или пароль пусты");
+            throw new InvalidCredentials("User name or password is empty");
         }
-        List<Authorities> userAuthorities = userRepository.getUserAuthorities(user, password);
+        
+        */
+        List<Authorities> userAuthorities = userRepository.getUserAuthorities(user);
         if (isEmpty(userAuthorities)) {
-            throw new UnauthorizedUser("Незарегистрированный пользователь " + user);
+            throw new UnauthorizedUser("Unrtgistered user " + user);
         }
         
         if (userAuthorities.get(0) == NON) {
-            throw new InvalidPassword("Неверный пароль пользователя " + user);
+            throw new InvalidPassword("Wrong password " + user);
         }
         
         return userAuthorities;
