@@ -5,12 +5,24 @@ import com.example.authorization_service.service.Authorities;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class UserAuthority {
     
-    private String login;
-    private String password;
     private List<Authorities> auth;
     
+    @NotBlank
+    @Size(min = 2, max = 30)
+    private String login;
+    
+    @NotBlank
+    @Size(min = 8)
+    private String password;
+    
+    public void setAuth(List<Authorities> auth) {
+        this.auth = auth;
+    }
+    
+    @Autowired
     public UserAuthority() {
     }
     
@@ -20,15 +32,24 @@ public class UserAuthority {
         this.auth = new ArrayList<>();
     }
     
-    public String getLogin() { return login; }
+    public void setLogin(String login) {
+        this.login = login;
+    }
     
-    public String getPassword() { return password; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
-    public List<Authorities> getAuth() { return auth; }
     
-    public void setLogin(String login) { this.login = login; }
+    public String getLogin() {
+        return login;
+    }
     
-    public void setPassword(String password) { this.password = password; }
+    public String getPassword() {
+        return password;
+    }
     
-    public void setAuth(List<Authorities> auth) { this.auth = auth; }
+    public List<Authorities> getAuth() {
+        return auth;
+    }
 }
