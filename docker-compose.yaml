@@ -1,0 +1,8 @@
+version: '1'
+
+build: ./
+services:
+  app1:
+    image: 'authorization_service:1.0'
+    ports:
+      - '8080:8080'
