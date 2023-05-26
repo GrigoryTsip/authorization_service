@@ -20,7 +20,7 @@ public class AuthorizationController {
         this.service = service;
     }
     
-    // Делаем свою аннотацию, которая читает запрос и формирует объект UserAuthority
+    
     @GetMapping("/authorize")
     @HandlerMethodArgumentResolver
     public List<Authorities> getAuthorities(@Valid UserAuthority user) {
